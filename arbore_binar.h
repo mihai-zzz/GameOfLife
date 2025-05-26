@@ -13,6 +13,7 @@ struct nod_arb_bin {
 BN* creare_arbore(int nivel);
 
 void afis_preordine(FILE* out, BN* root, celula** grila, int lin, int col, int flag_radacina);
+void hamilton_preordine(FILE* out, BN* root, celula** grila, int lin, int col, int flag_radacina);
 void umplere_arbore(BN* root, celula** grila, int lin, int col, int flag_st, int flag_radacina);
 void eliberare_arbore(BN** root);
 

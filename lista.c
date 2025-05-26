@@ -40,6 +40,47 @@ void eliberare_lista(lista** head){
     *head = NULL;    
 }
 
+int cmp(const lista* lant1, const lista* lant2, int len){
+    for(int i = 0; i < len; i++)
+        if(lant1[i].y < lant2[i].y) return 1;
+        else if(lant1[i].y == lant2[i].y){
+            if(lant1[i].x < lant2[i].x) return 1;
+            else if(lant1[i].x == lant2[i].x) continue;
+            else return 0;
+        } else return 0;
+    
+    return 0;
+}
+
+int hamilton(lista* lant, celula** grila, int lin, int col, int x, int y, int nr_cel, int nivel){
+    const int dir_l[8] = {-1, -1, -1, 0, 0, 1, 1, 1}, dir_c[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+    lista punct;
+    punct.x = x;
+    punct.y = y;
+    punct.urm = NULL;
+
+    grila[y+1][x+1].vie = 0;
+    lant[nivel] = punct;
+
+    if(nivel == (nr_cel - 1)){
+        grila[y+1][x+1].vie = 1;
+        return 1;
+    }
+
+    for(int i = 0; i < 8; i++)
+        if(grila[y+dir_l[i]+1][x+dir_c[i]+1].vie){
+            int len = hamilton(lant, grila, lin, col, x+dir_c[i], y+dir_l[i], nr_cel, nivel+1);
+            if(len){
+                grila[y+1][x+1].vie = 1;
+                return (len+1);
+            }
+        }
+    
+    grila[y+1][x+1].vie = 1;
+    return 0;
+}
+
 lista* convertto_lista(celula** grila, int lin, int col){
     lista* actual = NULL, *head = NULL;
     int flag = 0;

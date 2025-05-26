@@ -14,10 +14,10 @@ int main(int argc, const char* argv[]){
 
     fscanf(in, "%d %d %d %d ", &T, &N, &M, &K);
     grila = citire(in, N+2, M+2);
+    reset_vecini(grila, N+2, M+2);
 
     switch(T){
         case 1:
-            reset_vecini(grila, N+2, M+2);
             afis_grila(out, grila, N+2, M+2);
         
             for(int i = 0; i < K; i++){
@@ -30,8 +30,6 @@ int main(int argc, const char* argv[]){
             break;
 
         case 2:
-            reset_vecini(grila, N+2, M+2);
-        
             for(int i = 0; i < K; i++){
                 num_vecini(grila, N+2, M+2);
                 impinge(&temp, schimbariBD(grila, N+2, M+2));
@@ -45,24 +43,30 @@ int main(int argc, const char* argv[]){
 
             break;
 
-        case 3:
+        case 3: 
             root = creare_arbore(K);
-            reset_vecini(grila, N+2, M+2);
-
             umplere_arbore(root, grila, N+2, M+2, 0, 1);
-            afis_preordine(out, root, NULL, N+2, M+2, 1);
+            
+            afis_preordine(out, root, NULL, N+2, M+2, 1); 
+            
+            break;
 
-            eliberare_arbore(&root);
+        case 4: 
+            root = creare_arbore(K);
+            umplere_arbore(root, grila, N+2, M+2, 0, 1);
+
+            hamilton_preordine(out, root, NULL, N+2, M+2, 1);
 
             break;
 
-        case 4: break;
         default: break;
     }
 
     eliberare_grila(grila, N+2);
+    eliberare_arbore(&root);
 
     fclose(in);
     fclose(out);
+
     return 0;
 }

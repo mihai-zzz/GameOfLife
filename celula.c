@@ -46,6 +46,23 @@ void modifB(celula** grila, int lin, int col){
                 if(grila[i][j].nr_vec == 2) grila[i][j].vie = 1;
 }
 
+void comp_conexa(celula** grila, celula** cc, int x, int y){
+    const int dir_l[8] = {-1, -1, -1, 0, 0, 1, 1, 1}, dir_c[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+    cc[y+1][x+1].vie = 1;
+
+    for(int i = 0; i < 8; i++)
+        if(grila[y+dir_l[i]+1][x+dir_c[i]+1].vie && !cc[y+dir_l[i]+1][x+dir_c[i]+1].vie) comp_conexa(grila, cc, x+dir_c[i], y+dir_l[i]);
+}
+
+int nr_celule(celula** grila, int lin, int col){
+    int nr = 0;
+
+    for(int i = 0; i < lin; i++)
+        for(int j = 0; j < col; j++) nr += grila[i][j].vie;
+
+    return nr;
+}
+
 void eliberare_grila(celula** grila, int lin){
     for(int i = 0; i < lin; i++) free(grila[i]);
     free(grila);

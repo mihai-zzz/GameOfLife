@@ -13,6 +13,10 @@ void reset_vecini(celula** grila, int lin, int col);
 void modifBD(celula** grila, int lin, int col);
 void modifB(celula** grila, int lin, int col);
 
+void comp_conexa(celula** grila, celula** cc, int x, int y);
+
+int nr_celule(celula** grila, int lin, int col);
+
 void eliberare_grila(celula** grila, int lin);
 
 celula** citire(FILE* in, int lin, int col);
