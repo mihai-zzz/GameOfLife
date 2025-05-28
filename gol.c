@@ -58,6 +58,36 @@ int main(int argc, const char* argv[]){
             hamilton_preordine(out, root, NULL, N+2, M+2, 1);
 
             break;
+        
+        case 5:
+            char c = '\n';
+            int x, y, nr_gen = 0;
+            lista* head;
+
+            while(nr_gen < K){
+                head = NULL;
+                do {
+                    if(c == '\n'){
+                        fscanf(in, "%d%*c%d%*c%d%c", &nr_gen, &y, &x, &c);
+                    }
+                    else fscanf(in, "%d%*c%d%c", &y, &x, &c);
+                    adauga(&head, x, y);
+                } while(c != '\n');
+                impinge(&st, head);
+            }
+
+            while(st != NULL){
+                head = elem_scos(&st);
+                while(head != NULL){
+                    grila[(head->y) + 1][(head->x) + 1].vie = !grila[(head->y) + 1][(head->x) + 1].vie;
+                    head = head->urm;
+                }
+            }
+
+            afis_grila(out, grila, N+2, M+2);
+            eliberare_stiva(&st);
+            
+            break;
 
         default: break;
     }

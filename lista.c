@@ -52,7 +52,7 @@ int cmp(const lista* lant1, const lista* lant2, int len){
     return 0;
 }
 
-int hamilton(lista* lant, celula** grila, int lin, int col, int x, int y, int nr_cel, int nivel){
+int hamilton(lista* lant, celula** grila, int x, int y, int nr_cel, int nivel){
     const int dir_l[8] = {-1, -1, -1, 0, 0, 1, 1, 1}, dir_c[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
     lista punct;
@@ -70,7 +70,7 @@ int hamilton(lista* lant, celula** grila, int lin, int col, int x, int y, int nr
 
     for(int i = 0; i < 8; i++)
         if(grila[y+dir_l[i]+1][x+dir_c[i]+1].vie){
-            int len = hamilton(lant, grila, lin, col, x+dir_c[i], y+dir_l[i], nr_cel, nivel+1);
+            int len = hamilton(lant, grila, x+dir_c[i], y+dir_l[i], nr_cel, nivel+1);
             if(len){
                 grila[y+1][x+1].vie = 1;
                 return (len+1);

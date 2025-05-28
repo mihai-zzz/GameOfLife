@@ -79,7 +79,7 @@ void hamilton_preordine(FILE* out, BN* root, celula** grila, int lin, int col, i
                 comp_conexa(grila, cc, j-1, i-1);
                 nr_cel = nr_celule(cc, lin, col);
                 lant = (lista*)calloc(nr_cel, sizeof(lista));
-                len = hamilton(lant, grila, lin, col, j-1, i-1, nr_cel, 0);
+                len = hamilton(lant, grila, j-1, i-1, nr_cel, 0);
 
                 if(len){
                     for(int k = 0; k < len; k++) vizitat[lant[k].y + 1][lant[k].x + 1].vie = 1;
